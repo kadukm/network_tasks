@@ -1,7 +1,7 @@
 usage: python astracer.py address
 
 Options:
-\taddress - ip address or domain
+    address - ip address or domain
 
 Example:
 python astracer.py ya.ru

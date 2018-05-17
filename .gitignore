@@ -32,3 +32,4 @@ _ReSharper*/
 packages/
 .idea/
 __pycache__/
+TelegramAPI/.bot_info.txt

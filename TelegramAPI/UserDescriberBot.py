@@ -62,8 +62,8 @@ class UserDescriberBot:
         inline_keyboard = self.generate_inline_keyboard(inline_query)
         query = inline_query['query']
         query = (query if query
-                 else 'Press to the "Give" button to see basic '
-                      'information about you telegram account')
+                 else 'Press to the "Give" button to see basic information '
+                      '(fullname, username, id) about you telegram account')
         content = {'message_text': query}
 
         inline_query_result_article = {

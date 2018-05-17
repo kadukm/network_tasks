@@ -95,8 +95,3 @@ class UserDescriberBot:
             {'text': 'Give', 'callback_data': 'give'},
             {'text': 'Deny', 'callback_data': 'deny'}
         ]]
-
-
-if __name__ == '__main__':
-    my_bot = UserDescriberBot('476153691:AAH8P15-ZyMHxqhwE9C6uxEbLpfEWoIr9CM')
-    my_bot.run()

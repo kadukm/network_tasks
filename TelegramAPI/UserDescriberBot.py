@@ -2,6 +2,8 @@ import requests
 import logging
 import json
 
+from util import try_add_info
+
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
@@ -81,12 +83,10 @@ class UserDescriberBot:
         text = ["Access is denied"]
         if callback_query['data'] == 'give':
             text.clear()
-            text.append(f"First name: {user['first_name']}")
-            last_name = user.get('last_name')
-            if last_name is not None:
-                text.append(f"Last name: {last_name}")
-            text.append(f"Username: @{user['username']}")
-            text.append(f"Telegram ID: <b>{user['id']}</b>")
+            try_add_info('first_name', user, 'First name: {}', text)
+            try_add_info('last_name', user, 'Last name: {}', text)
+            try_add_info('username', user, 'Username: @{}', text)
+            try_add_info('id', user, 'Telegram ID: <b>{}</b>', text)
         return {'inline_message_id': callback_query['inline_message_id'],
                 'text': '\n'.join(text), 'parse_mode': 'HTML'}
 

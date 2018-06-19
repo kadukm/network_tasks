@@ -1,3 +1,7 @@
 My simple message.
+With dot
+.
+И русскими символами
+И странными символами: ©╣◘
 There are few lines in the letter :)
 Good luck

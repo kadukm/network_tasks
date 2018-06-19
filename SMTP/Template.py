@@ -17,9 +17,11 @@ class Template:
     }
 
     def __init__(self, text_path, files, theme):
-        self.login = 'containerKN-103@yandex.ru'
-        self.pswd = 'qwerty123456'
-        self.stop_symbol = '--?+?'
+        self.login = 'mk.shark25@yandex.ru'
+        self.pswd = (
+        	'PASSWORD'
+        	)
+        self.stop_symbol = '--15HmuRniMa=====OImHacfE45heReHe'
         self.header = [
             'EHLO my_test',
             'AUTH LOGIN',
@@ -32,32 +34,40 @@ class Template:
             'From: Me {}'.format(self.login),
             None,  # addressee must be here
             'Subject: {}'.format(theme),
-            'Content-Type: multipart/mixed; boundary={};'.format(self.stop_symbol),
-            self.stop_symbol]
+            'Content-Type: multipart/mixed; boundary={};'.format(self.stop_symbol[2:]),
+            '']
         self._add_text(text_path)
         self._add_files(files)
         self._end_body()
 
     def _add_text(self, text_path):
-        self.body.append('Content-Type: text/plain')
-        with open(text_path) as f:
-            self.body.append(f.read())
+        self.body.append(self.stop_symbol)
+        self.body.append('Content-Type: text/plain; charset="utf-8"')
+        self.body.append('')
+        with open(text_path, 'r', encoding='utf-8') as f:
+            for line in f:
+                if line.endswith('\n'):
+                    line = line[:-1]
+                if line == '.':
+                    line = '..'
+                self.body.append(line)
 
     def _add_files(self, files):
         for filepath in files:
             filename = os.path.basename(filepath)
             data, ext = self.parse_file(filepath)
             self.body += [
+                self.stop_symbol,
                 'Content-Type:{}; name={}'.format(self.MIME_TYPES[ext], filename),
                 'Content-Transfer-Encoding:base64',
                 'Content-Disposition:attachment; filename={}'.format(filename),
                 '',
-                base64.b64encode(data).decode(),
-                '',
-                self.stop_symbol]
+                base64.b64encode(data).decode()]
 
     def _end_body(self):
-        self.body[-1] == '--'
+        # self.body.append('')
+        self.body.append(self.stop_symbol + '--')
+        self.body.append('')
         self.body.append('.')
 
     def _set_addressee(self, addressee):

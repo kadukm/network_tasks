@@ -15,8 +15,7 @@ def get_data_about_query(msg, offset):
 def get_domain_name(query, offset):
     res = []
     if query[offset] // 16 == 12:
-        offset =\
-            struct.unpack('!H', msg[offset: offset + 4])[0] - 12 * (16 ** 3)
+        offset = struct.unpack('!H', query[offset: offset + 4])[0] - 12 * (16 ** 3)
     while query[offset] != 0:
         cur_len = query[offset]
         res.append(query[offset + 1: offset + cur_len + 1].decode())

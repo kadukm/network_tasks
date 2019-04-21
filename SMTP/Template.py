@@ -19,8 +19,8 @@ class Template:
     def __init__(self, text_path, files, theme):
         self.login = 'mk.shark25@yandex.ru'
         self.pswd = (
-        	'PASSWORD'
-        	)
+            'PASSWORD'
+            )
         self.stop_symbol = '--15HmuRniMa=====OImHacfE45heReHe'
         self.header = [
             'EHLO my_test',
